@@ -3,8 +3,8 @@
   <td class="align-middle"><%= campaign.created_at %></td>
   <td>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-      <%= link_to 'Show', campaign, class: "btn btn-success" %>
-      <%= link_to 'Edit', edit_campaign_path(campaign), class: "btn btn-warning" %>
+      <%= link_to 'Show', campaign, class: "btn btn-success", data: { turbo: false } %>
+      <%= link_to 'Edit', edit_campaign_path(campaign), class: "btn btn-warning", data: { turbo: false } %>
       <%= button_to 'Destroy', campaign, method: :delete, class: 'btn btn-outline-primary', class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' }} %>
     </div>
   </td>

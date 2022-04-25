@@ -3,12 +3,20 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns or /campaigns.json
   def index
-    @campaigns = Campaign.includes(:items).recent.page(params[:page]).per(20)
+    @q = Campaign.ransack(params[:q])
+    @campaigns = @q.result.includes(:items).recent.page(params[:page]).per(20)
+
+    if turbo_frame_request?
+      render partial: "campaigns", locals: { campaigns: @campaigns }
+    else
+      render :index
+    end
   end
 
   # GET /campaigns/1 or /campaigns/1.json
   def show
-    @items = @campaign.items.page(params[:page]).per(20)
+    @q = @campaign.items.ransack(params[:q])
+    @items = @q.result.page(params[:page]).per(20)
   end
 
   # GET /campaigns/new
@@ -26,6 +34,7 @@ class CampaignsController < ApplicationController
 
     respond_to do |format|
       if @campaign.save
+        @campaigns =  Campaign.includes(:items).recent.page(params[:page]).per(20)
         format.turbo_stream
         format.html { redirect_to campaigns_url, notice: "Campaign was successfully created." }
         format.json { render :show, status: :created, location: @campaign }
@@ -41,6 +50,7 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
+        @campaigns =  Campaign.includes(:items).recent.page(params[:page]).per(20)
         format.html { redirect_to campaigns_url, notice: "Campaign was successfully updated." }
         format.json { render :show, status: :ok, location: @campaign }
       else

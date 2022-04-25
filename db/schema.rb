@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_25_080558) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_25_180059) do
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_campaigns_on_name"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -26,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_080558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_line_items_on_campaign_id"
+    t.index ["name"], name: "index_line_items_on_name"
   end
 
   add_foreign_key "line_items", "campaigns"

@@ -1,5 +1,5 @@
-<%= turbo_stream.prepend "campaigns" do %>
-  <%= render "campaign", campaign: @campaign %>
+<%= turbo_stream.replace "campaigns" do %>
+  <%= render "campaigns", campaigns: @campaigns %>
 <% end %>
 <%= turbo_stream.replace "#{dom_id(Campaign.new)}_form" do %>
   <%= render "form", campaign: Campaign.new %>

@@ -75,3 +75,4 @@ end
 gem 'bootstrap'
 gem 'simple_form'
 gem 'kaminari'
+gem 'ransack'

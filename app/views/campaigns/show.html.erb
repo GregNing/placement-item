@@ -1,13 +1,18 @@
 <div class="col-md-12">
   <%= link_to("New Item", new_campaign_line_item_path(@campaign),class: "btn btn-primary pull-right") %>
   <h2><%= @campaign.name %></h2>
+  <%= search_form_for @q, url: campaign_path(@campaign), data: { controller: 'search-form', turbo_frame: 'items', turbo_action: 'advance'} do |f| %>
+  <div class="input-group mb-3">
+    <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Search Line Item Name...', data: {action: "input->search-form#search"} %>
+  </div>
+  <% end %>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Item Name</th>
-        <th>Booked Amount</th>
-        <th>Actual Amount</th>
-        <th>Adjustments</th>
+        <td>Item Name&nbsp;<%= sort_link(@q, :name, 'Sort', default_order: :desc) %></td>
+        <td>Booked Amount&nbsp;<%= sort_link(@q, :booked_amount, 'Sort', default_order: :desc) %></td>
+        <td>Actual Amount&nbsp;<%= sort_link(@q, :actual_amount, 'Sort', default_order: :desc) %></td>
+        <td>Adjustments&nbsp;<%= sort_link(@q, :adjustments, 'Sort', default_order: :desc) %></td>
         <th colspan="1"></th>
       </tr>
     </thead>
@@ -20,8 +25,8 @@
           <td class="align-middle"><%= item.adjustments %></td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <%= link_to 'Show', campaign_line_item_path(@campaign, item), class: 'btn btn-success' %>
-              <%= link_to('Edit', edit_campaign_line_item_path(@campaign, item), class: 'btn btn-warning') %>
+              <%= link_to 'Show', campaign_line_item_path(@campaign, item), class: 'btn btn-success', data: { turbo: false } %>
+              <%= link_to('Edit', edit_campaign_line_item_path(@campaign, item), class: 'btn btn-warning', data: { turbo: false }) %>
               <%= button_to('Destroy', campaign_line_item_path(@campaign, item), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' }}, class: 'btn btn-danger') %>
             </div>
           </td>
