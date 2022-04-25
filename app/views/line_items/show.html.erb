@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @line_item %>
+
+<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <%= link_to "Edit this Campaign line item", edit_campaign_line_item_path(@campaign, @line_item), class: "btn btn-success" %>
+  <%= link_to "Back to Campaign line items", campaign_path(@campaign), class: "btn btn-warning" %>
+  <%= button_to "Destroy this line item", campaign_line_item_path(@campaign, @line_item), method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' }} %>
+</div>

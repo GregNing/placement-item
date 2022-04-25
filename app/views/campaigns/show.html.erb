@@ -1,0 +1,40 @@
+<div class="col-md-12">
+  <%= link_to("New Item", new_campaign_line_item_path(@campaign),class: "btn btn-primary pull-right") %>
+  <h2><%= @campaign.name %></h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Booked Amount</th>
+        <th>Actual Amount</th>
+        <th>Adjustments</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td class="align-middle"><%= item.name %></td>
+          <td class="align-middle"><%= item.booked_amount %></td>
+          <td class="align-middle"><%= item.actual_amount %></td>
+          <td class="align-middle"><%= item.adjustments %></td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <%= link_to 'Show', campaign_line_item_path(@campaign, item), class: 'btn btn-success' %>
+              <%= link_to('Edit', edit_campaign_line_item_path(@campaign, item), class: 'btn btn-warning') %>
+              <%= button_to('Destroy', campaign_line_item_path(@campaign, item), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' }}, class: 'btn btn-danger') %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @items %>
+
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+  <%= link_to('Edit Campaigns', edit_campaign_path(@campaign), class: 'btn btn-outline-primary') %>
+  <%= link_to 'Back To Campaigns', campaigns_path, class: 'btn btn-outline-primary' %>
+</div>
+

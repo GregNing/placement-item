@@ -1,0 +1,11 @@
+<h1>Editing line item</h1>
+
+<%= render "form", line_item: @line_item %>
+
+<br>
+
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+  <%= link_to "Show this line item", campaign_line_item_path(@campaign, @line_item), class: 'btn btn-outline-primary' %>
+  <%= link_to "Back to Campaign line items", campaign_path(@campaign), class: 'btn btn-outline-primary' %>
+</div>
+

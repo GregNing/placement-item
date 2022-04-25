@@ -1,0 +1,11 @@
+<tr id="<%= dom_id campaign %>">
+  <td class="align-middle"><%= campaign.name %></td>
+  <td class="align-middle"><%= campaign.created_at %></td>
+  <td>
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      <%= link_to 'Show', campaign, class: "btn btn-success" %>
+      <%= link_to 'Edit', edit_campaign_path(campaign), class: "btn btn-warning" %>
+      <%= button_to 'Destroy', campaign, method: :delete, class: 'btn btn-outline-primary', class: "btn btn-danger", form: { data: { turbo_confirm: 'Are you sure?' }} %>
+    </div>
+  </td>
+</tr>
