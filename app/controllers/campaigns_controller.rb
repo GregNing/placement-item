@@ -3,7 +3,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns or /campaigns.json
   def index
-    @campaigns = Campaign.includes(:items).page(params[:page]).per(20)
+    @campaigns = Campaign.includes(:items).recent.page(params[:page]).per(20)
   end
 
   # GET /campaigns/1 or /campaigns/1.json
@@ -26,9 +26,11 @@ class CampaignsController < ApplicationController
 
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to campaign_url(@campaign), notice: "Campaign was successfully created." }
+        format.turbo_stream
+        format.html { redirect_to campaigns_url, notice: "Campaign was successfully created." }
         format.json { render :show, status: :created, location: @campaign }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("#{helpers.dom_id(@campaign)}_form", partial: "form", locals: { campaign: @campaign }) }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @campaign.errors, status: :unprocessable_entity }
       end
@@ -39,7 +41,7 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        format.html { redirect_to campaign_url(@campaign), notice: "Campaign was successfully updated." }
+        format.html { redirect_to campaigns_url, notice: "Campaign was successfully updated." }
         format.json { render :show, status: :ok, location: @campaign }
       else
         format.html { render :edit, status: :unprocessable_entity }

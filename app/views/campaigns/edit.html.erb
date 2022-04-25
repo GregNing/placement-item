@@ -4,7 +4,7 @@
 
 <br>
 
-<div>
-  <%= link_to "Show this campaign", @campaign %> |
-  <%= link_to "Back to campaigns", campaigns_path %>
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+  <%= link_to('Show this Campaign', campaign_path(@campaign), class: 'btn btn-outline-primary') %>
+  <%= link_to 'Back To Campaigns', campaigns_path, class: 'btn btn-outline-primary' %>
 </div>

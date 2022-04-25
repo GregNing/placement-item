@@ -1,13 +1,10 @@
 
-<%= simple_form_for(@campaign) do |f| %>
+<%= simple_form_for(campaign, html: { id: "#{dom_id(campaign)}_form" }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs mb-3">
-    <%= f.input :name %>
-  </div>
-
-  <div class="form-actions">
+  <div class="input-group mb-3">
+    <%= f.input_field :name, class: 'form-control', placeholder: 'Campaign Name' %>
     <%= f.button :submit, class: "btn-primary" %>
   </div>
 <% end %>
