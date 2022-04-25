@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Env
+* Ruby 3.1.2
 
-Things you may want to cover:
+## HomeBrew
 
-* Ruby version
+if you didn't install vips before please install vips, we will need it in rails 7.
 
-* System dependencies
+```
+brew install vips
+```
 
-* Configuration
+## Rub Bundle install
+```
+bundle install
+```
+## **Start Projects**
 
-* Database creation
+1. Create Local db and data。
+```
+rails db:create
+rails db:migrate
 
-* Database initialization
+rails import_data:campaign_line_items
+````
+2. run rails server
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+rails s
+```

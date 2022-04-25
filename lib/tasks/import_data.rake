@@ -27,26 +27,5 @@ namespace :import_data do
     logger.info "Import Items Data #{items}"
     logger.info "Import Items Data Size: #{items.length}"
     LineItem.insert_all(items)
-
-    # logger = Logger.new("#{Rails.root}/log/import_data.log")
-    # placements_teaser_data = JSON.parse(File.read(File.join(Rails.root, 'doc', 'placements_teaser_data.json')))
-    # logger.info '=========== Start ==========='
-    # puts '=========== Start ==========='
-
-    # placements_teaser_data.each do |data|
-    #   logger.info "Import Data #{data}"
-    #   puts "Import Data #{data}"
-    #   campaign = Campaign.find_or_create_by(name: data['campaign_name'])
-    #   campaign.items.build(
-    #     name: data['line_item_name'],
-    #     booked_amount: data['booked_amount'],
-    #     actual_amount: data['actual_amount'],
-    #     adjustments: data['adjustments']
-    #   )
-    #   campaign.save!
-    # end
-
-    # logger.info '=========== End ==========='
-    # puts '=========== End ==========='
   end
 end
