@@ -3,7 +3,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns or /campaigns.json
   def index
-    @q = Campaign.ransack(params[:q])
+    search_campaign
     @campaigns = @q.result.includes(:items).recent.page(params[:page]).per(20)
 
     if turbo_frame_request?
@@ -34,7 +34,8 @@ class CampaignsController < ApplicationController
 
     respond_to do |format|
       if @campaign.save
-        @campaigns =  Campaign.includes(:items).recent.page(params[:page]).per(20)
+        search_campaign
+        @campaigns = @q.result.includes(:items).recent.page(1).per(20)
         format.turbo_stream
         format.html { redirect_to campaigns_url, notice: "Campaign was successfully created." }
         format.json { render :show, status: :created, location: @campaign }
@@ -50,7 +51,6 @@ class CampaignsController < ApplicationController
   def update
     respond_to do |format|
       if @campaign.update(campaign_params)
-        @campaigns =  Campaign.includes(:items).recent.page(params[:page]).per(20)
         format.html { redirect_to campaigns_url, notice: "Campaign was successfully updated." }
         format.json { render :show, status: :ok, location: @campaign }
       else
@@ -80,4 +80,9 @@ class CampaignsController < ApplicationController
     def campaign_params
       params.require(:campaign).permit(:name)
     end
+
+    def search_campaign
+      @q = Campaign.ransack(params[:q])
+    end
+
 end
