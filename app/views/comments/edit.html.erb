@@ -1,0 +1,11 @@
+
+<h1>Editing comment</h1>
+
+<%= render "form", comment: @comment, item: @item %>
+
+<br>
+
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+  <%= link_to 'Show', line_item_comment_path(@item, @comment), class: 'btn btn-outline-primary' %>
+  <%= link_to('Back To Comments', line_item_comments_path(@item, @comment), class: 'btn btn-outline-primary') %>
+</div>

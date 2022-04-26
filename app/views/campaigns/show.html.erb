@@ -25,6 +25,7 @@
           <td class="align-middle"><%= item.adjustments %></td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <%= link_to 'Comments', line_item_comments_path(line_item_id: item), class: "btn btn-outline-primary", data: { turbo: false } %>
               <%= link_to 'Show', campaign_line_item_path(@campaign, item), class: 'btn btn-success', data: { turbo: false } %>
               <%= link_to('Edit', edit_campaign_line_item_path(@campaign, item), class: 'btn btn-warning', data: { turbo: false }) %>
               <%= button_to('Destroy', campaign_line_item_path(@campaign, item), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' }}, class: 'btn btn-danger') %>

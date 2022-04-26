@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="col-md-12">
+  <h1><%= "#{@item.name} Comments" %></h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Content</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <%= render 'comment', item: @item, comment: comment %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+  <%= link_to('New Comment', new_line_item_comment_path, class: 'btn btn-outline-primary') %>
+  <%= link_to 'Back To Line Item', campaign_path(@item.campaign), class: 'btn btn-outline-primary' %>
+</div>
