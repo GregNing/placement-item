@@ -29,6 +29,7 @@
               <%= link_to 'Show', campaign_line_item_path(@campaign, item), class: 'btn btn-success', data: { turbo: false } %>
               <%= link_to('Edit', edit_campaign_line_item_path(@campaign, item), class: 'btn btn-warning', data: { turbo: false }) %>
               <%= button_to('Destroy', campaign_line_item_path(@campaign, item), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' }}, class: 'btn btn-danger') %>
+              <%= link_to 'History', line_item_histories_path(line_item_id: item), class: "btn btn-primary", data: { turbo: false } %>
             </div>
           </td>
         </tr>

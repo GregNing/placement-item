@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_26_010060) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_05_041622) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -64,6 +64,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_010060) do
     t.index ["line_item_id"], name: "index_comments_on_line_item_id"
   end
 
+  create_table "line_item_histories", force: :cascade do |t|
+    t.string "name"
+    t.float "booked_amount"
+    t.float "actual_amount"
+    t.float "adjustments"
+    t.integer "line_item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["line_item_id"], name: "index_line_item_histories_on_line_item_id"
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.string "name", null: false
     t.float "booked_amount"
@@ -79,5 +90,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_26_010060) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "line_items"
+  add_foreign_key "line_item_histories", "line_items"
   add_foreign_key "line_items", "campaigns"
 end
