@@ -2,47 +2,54 @@ require "test_helper"
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @campaign = campaigns(:one)
+    @line_item = line_items(:one)
     @comment = comments(:one)
   end
 
-  test "should get index" do
-    get comments_url
+  test 'should get index' do
+    get line_item_comments_url(line_item_id: @line_item.id)
     assert_response :success
   end
 
-  test "should get new" do
-    get new_comment_url
+  test 'should get new' do
+    get new_line_item_comment_url(line_item_id: @line_item.id)
     assert_response :success
   end
 
-  test "should create comment" do
-    assert_difference("Comment.count") do
-      post comments_url, params: { comment: { name: @comment.name } }
+  test 'should create comment' do
+    assert_difference('Comment.count') do
+      post "/line_items/#{@line_item.id}/comments", params: { comment: { name: @comment.name, content: @comment.content.body } }
     end
 
-    assert_redirected_to comment_url(Comment.last)
+    assert_redirected_to line_item_comments_url(line_item_id: @line_item.id)
   end
 
-  test "should show comment" do
-    get comment_url(@comment)
+  test 'should show comment' do
+    get line_item_comment_url(line_item_id: @line_item.id, id: @comment.id)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_comment_url(@comment)
+  test 'should get edit' do
+    get edit_line_item_comment_url(line_item_id: @line_item.id, id: @comment.id)
     assert_response :success
   end
 
-  test "should update comment" do
-    patch comment_url(@comment), params: { comment: { name: @comment.name } }
-    assert_redirected_to comment_url(@comment)
+  test 'should update comment' do
+    patch line_item_comment_url(line_item_id: @line_item.id, id: @comment.id), params: {
+      comment: {
+        name: @comment.name,
+        content: '<div>Hello, from <strong>a fixture</strong></div>'
+      }
+    }
+    assert_redirected_to line_item_comments_url(line_item_id: @line_item.id)
   end
 
-  test "should destroy comment" do
-    assert_difference("Comment.count", -1) do
-      delete comment_url(@comment)
+  test 'should destroy comment' do
+    assert_difference('Comment.count', -1) do
+      delete line_item_comment_url(line_item_id: @line_item.id, id: @comment.id)
     end
 
-    assert_redirected_to comments_url
+    assert_redirected_to line_item_comments_url(line_item_id: @line_item.id)
   end
 end

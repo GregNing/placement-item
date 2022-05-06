@@ -2,6 +2,6 @@
 
 one:
   name: MyString
-  line_item: one
-# two:
-#   name: MyString
+
+campaign:
+  name: MyString

@@ -2,11 +2,6 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: %i[ show edit update destroy ]
   before_action :set_campaign, only: %i[new create destroy edit update show]
 
-  # GET /line_items or /line_items.json
-  def index
-    @line_items = LineItem.all
-  end
-
   # GET /line_items/1 or /line_items/1.json
   def show
   end

@@ -5,7 +5,7 @@ require 'version_history'
 class LineItem < ApplicationRecord
   include VersionHistory
   belongs_to :campaign
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :history, class_name: 'LineItem::History', dependent: :destroy
 
   validates :name, :booked_amount, :actual_amount, :adjustments, presence: true

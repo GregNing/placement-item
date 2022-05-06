@@ -2,3 +2,7 @@
 #   record: name_of_fixture (ClassOfFixture)
 #   name: content
 #   body: <p>In a <i>million</i> stars!</p>
+comment_one:
+  record: one (Comment)
+  name: content
+  body: <div>Hello, from <strong>a fixture</strong></div>

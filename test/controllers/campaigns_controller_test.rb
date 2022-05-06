@@ -20,7 +20,7 @@ class CampaignsControllerTest < ActionDispatch::IntegrationTest
       post campaigns_url, params: { campaign: { name: @campaign.name } }
     end
 
-    assert_redirected_to campaign_url(Campaign.last)
+    assert_redirected_to campaigns_url
   end
 
   test "should show campaign" do
@@ -35,7 +35,7 @@ class CampaignsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update campaign" do
     patch campaign_url(@campaign), params: { campaign: { name: @campaign.name } }
-    assert_redirected_to campaign_url(@campaign)
+    assert_redirected_to campaigns_url
   end
 
   test "should destroy campaign" do
